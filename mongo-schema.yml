@@ -9,4 +9,4 @@
     state: installed
 
 - name: Load {{component}} Schema
-  ansible.builtin.shell: mongo --host mongodb.rdevops74.online </app/schema/{{component}}.js
+  ansible.builtin.shell: mongo --host mongodb-dev.rdevops74.online </app/schema/{{component}}.js
