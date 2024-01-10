@@ -9,7 +9,7 @@
     state: installed
 
 - name: Download DocumentDB pem file
-  ansible.builtin.url:
+  ansible.builtin.get_url:
     url: https://truststore.pki.rds.amazonaws.com/global/global-bundle.pem
     dest: /app/rds-combined-ca-bundle.pem
 
