@@ -17,20 +17,14 @@
         path: /usr/share/nginx/html/*
         state: absent
 
-    - name: Download Application Content
-      ansible.builtin.shell: curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend.zip
-
-    - name: Extract Application Content
+    - name: Download and Extract Application Content
       ansible.builtin.unarchive:
-        src: /tmp/frontend.zip
+        src: https://roboshop-artifacts.s3.amazonaws.com/frontend.zip
         dest: /usr/share/nginx/html
         remote_src: yes
 
-#    - name: Enable Nginx Service
-#      ansible.builtin.systemd_service:
-#        state: enabled
-
     - name: Start Nginx Service
       ansible.builtin.systemd_service:
-        state: started
         name: nginx
+        state: restarted
+        enabled: yes
