@@ -12,8 +12,9 @@
       ansible.builtin.shell: module enable redis:remi-6.2 -y
 
     - name: Install Redis
-      ansible.builtin.yum: redis
-      state: installed
+      ansible.builtin.yum:
+        name: redis
+        state: installed
 
     - name: Update Listen Address
       ansible.builtin.replace:
