@@ -1,0 +1,8 @@
+- name: Dispatch SetUp
+  hosts: all
+  become: true
+  vars:
+    component: dispatch
+  tasks:
+    - name: Golang SetUp
+      ansible.builtin.import_tasks: golang.yml
