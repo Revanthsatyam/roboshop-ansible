@@ -61,4 +61,4 @@
 - name: Setup Filebeat
   ansible.builtin.import_role:
     name: elk
-    import_tasks: filebeat.yml
+    tasks_from: filebeat.yml
