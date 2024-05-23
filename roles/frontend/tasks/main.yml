@@ -52,11 +52,11 @@
     state: restarted
     enabled: yes
 
-- name: Restart Nginx Prometheus Exporter Service
-  ansible.builtin.systemd:
-    name: nginx_exporter
-    state: restarted
-    enabled: yes
+#- name: Restart Nginx Prometheus Exporter Service
+#  ansible.builtin.systemd:
+#    name: nginx_exporter
+#    state: restarted
+#    enabled: yes
 
 - name: Setup Filebeat
   ansible.builtin.import_role:
