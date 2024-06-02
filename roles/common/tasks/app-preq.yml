@@ -12,11 +12,11 @@
     path: /app
     state: directory
 
-- name: Download and Extract Application Content
-  ansible.builtin.unarchive:
-    src: https://roboshop-artifacts.s3.amazonaws.com/{{component}}.zip
-    dest: /app
-    remote_src: yes
+#- name: Download and Extract Application Content
+#  ansible.builtin.unarchive:
+#    src: https://roboshop-artifacts.s3.amazonaws.com/{{component}}.zip
+#    dest: /app
+#    remote_src: yes
 
 - name: Setup Rsyslog Configuration file
   ansible.builtin.template:
@@ -27,3 +27,13 @@
   ansible.builtin.systemd:
     name: "rsyslog"
     state: restarted
+
+- name: Download and Extract Application Content From Nexus
+  ansible.builtin.unarchive:
+    src: http://{{username}}:{{password}}@172.31.35.207:8081/repository/{{component}}/{{component}}-{{appVersion}}.zip
+    dest: /app
+    remote_src: yes
+  vars:
+    username: "{{ lookup('amazon.aws.aws_ssm', 'nexus.{{env}}.username', region='us-east-1') }}"
+    password: "{{ lookup('amazon.aws.aws_ssm', 'nexus.{{env}}.password', region='us-east-1') }}"
+    appVersion: "{{ lookup('amazon.aws.aws_ssm', 'nexus.{{env}}.appVersion', region='us-east-1') }}"
